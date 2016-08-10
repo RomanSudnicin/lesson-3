@@ -1,6 +1,7 @@
 package main;
 
 import accounts.AccountService;
+import dbService.DBService;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerList;
@@ -16,6 +17,10 @@ import servlets.StopServlet;
  */
 public class Main {
     public static void main (String[] args) throws Exception {
+
+        DBService.getDBService().printConnectInfo();
+
+        //System.exit(0);
 
         ServletContextHandler servletContextHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
         servletContextHandler.addServlet(new ServletHolder(new SignUpServlet()),"/signup");
