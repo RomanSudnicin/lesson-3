@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 /**
  * Created by roman on 09.08.16.
@@ -18,7 +19,11 @@ public class SignUpServlet extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         AccountService accountService = AccountService.getAccountService();
-        accountService.addNewUser(new UserProfile(login,password,""));
+        try {
+            accountService.addNewUser(new UserProfile(login,password,""));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         resp.getWriter().println("Was added " + login + " " + password);
         resp.setStatus(HttpServletResponse.SC_OK);

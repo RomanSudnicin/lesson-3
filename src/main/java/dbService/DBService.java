@@ -24,6 +24,10 @@ public class DBService {
         return dbService;
     }
 
+    public Connection getConnection() {
+        return connection;
+    }
+
     public void printConnectInfo() {
         try {
             System.out.println("DB name: " + connection.getMetaData().getDatabaseProductName());

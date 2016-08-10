@@ -33,7 +33,7 @@ public class Main {
 
 
         HandlerList handlers = new HandlerList();
-        handlers.setHandlers(new Handler[] {servletContextHandler,resourceHandler });
+        handlers.setHandlers(new Handler[] {resourceHandler, servletContextHandler });
 
         Server server = new Server(8080);
         server.setHandler(handlers);

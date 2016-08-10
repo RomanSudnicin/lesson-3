@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 /**
  * Created by roman on 09.08.16.
@@ -18,7 +19,12 @@ public class SignInServlet extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         AccountService accountService = AccountService.getAccountService();
-        UserProfile userProfile = accountService.getUserByLogin(login);
+        UserProfile userProfile = null;
+        try {
+            userProfile = accountService.getUserByLogin(login);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         if(userProfile == null || !userProfile.getPass().equals(password)){
             resp.setContentType("text/html;charset=utf-8");
