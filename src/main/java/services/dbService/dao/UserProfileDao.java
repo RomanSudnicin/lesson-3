@@ -1,7 +1,7 @@
-package dbService.dao;
+package services.dbService.dao;
 
-import accounts.UserProfile;
-import dbService.executor.Executor;
+import services.accounts.UserProfile;
+import services.dbService.executor.Executor;
 
 import java.sql.Connection;
 import java.sql.SQLException;
