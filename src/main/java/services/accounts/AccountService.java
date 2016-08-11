@@ -1,7 +1,7 @@
-package accounts;
+package services.accounts;
 
-import dbService.DBService;
-import dbService.dao.UserProfileDao;
+import services.Context;
+import services.dbService.DBService;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -14,24 +14,18 @@ public class AccountService {
     private final Map<String, UserProfile> sessionIdToProfile;
 
     private static AccountService accountService;
+    private final DBService dbService;
 
-    private UserProfileDao userProfileDao;
 
-    private AccountService() {
-        userProfileDao = new UserProfileDao(DBService.getDBService().getConnection());
+    public AccountService(Context context) {
         sessionIdToProfile = new HashMap<>();
+        dbService = (DBService) context.get(DBService.class);
     }
 
-    public static AccountService getAccountService() {
-        if (accountService == null) {
-            accountService = new AccountService();
-        }
-        return accountService;
-    }
 
-    public void addNewUser(UserProfile userProfile) throws SQLException {
+    public void addNewUser(UserProfile userProfile) {
 
-        userProfileDao.insertUser(userProfile);
+        dbService.addUserProfile(userProfile);
 
     }
 
@@ -44,7 +38,7 @@ public class AccountService {
     }
 
     public UserProfile getUserByLogin(String login) throws SQLException {
-        return userProfileDao.getUserProfileByLogin(login);
+        return dbService.getUserProfileByLogin(login);
     }
 
     public UserProfile getUserBySessionId(String sessionId) {
