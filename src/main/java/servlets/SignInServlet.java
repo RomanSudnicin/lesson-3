@@ -1,5 +1,6 @@
 package servlets;
 
+import services.Context;
 import services.accounts.AccountService;
 import services.accounts.UserProfile;
 
@@ -14,11 +15,17 @@ import java.sql.SQLException;
  * Created by roman on 09.08.16.
  */
 public class SignInServlet extends HttpServlet {
+    private final Context context;
+
+    public SignInServlet(Context context) {
+        this.context = context;
+    }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-        AccountService accountService = AccountService.getAccountService();
+        AccountService accountService = (AccountService) context.get(AccountService.class);
         UserProfile userProfile = null;
         try {
             userProfile = accountService.getUserByLogin(login);
@@ -26,7 +33,7 @@ public class SignInServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        if(userProfile == null || !userProfile.getPass().equals(password)){
+        if (userProfile == null || !userProfile.getPass().equals(password)) {
             resp.setContentType("text/html;charset=utf-8");
             resp.getWriter().print("Unauthorized");
             resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

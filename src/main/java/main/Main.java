@@ -1,6 +1,7 @@
 package main;
 
 import services.Context;
+import services.accounts.AccountService;
 import services.dbService.DBService;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
@@ -20,14 +21,14 @@ public class Main {
 
         Context context = new Context();
         context.add(DBService.class,new DBService());
-        context.add(DBService.class,new DBService());
+        context.add(AccountService.class, new AccountService(context));
 
 
 
 
         ServletContextHandler servletContextHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        servletContextHandler.addServlet(new ServletHolder(new SignUpServlet()),"/signup");
-        servletContextHandler.addServlet(new ServletHolder(new SignInServlet()),"/signin");
+        servletContextHandler.addServlet(new ServletHolder(new SignUpServlet(context)),"/signup");
+        servletContextHandler.addServlet(new ServletHolder(new SignInServlet(context)),"/signin");
         servletContextHandler.addServlet(new ServletHolder(new StopServlet()),"/stop");
 
 

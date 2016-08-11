@@ -17,13 +17,13 @@ public class AccountService {
     private final DBService dbService;
 
 
-    private AccountService(Context context) {
+    public AccountService(Context context) {
         sessionIdToProfile = new HashMap<>();
         dbService = (DBService) context.get(DBService.class);
     }
 
 
-    public void addNewUser(UserProfile userProfile) throws SQLException {
+    public void addNewUser(UserProfile userProfile) {
 
         dbService.addUserProfile(userProfile);
 

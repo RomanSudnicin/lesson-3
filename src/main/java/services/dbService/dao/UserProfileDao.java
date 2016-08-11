@@ -19,7 +19,7 @@ public class UserProfileDao {
     public void insertUser(UserProfile userProfile) throws SQLException {
         executor.execUpdate("insert into user_table (login,password) values ('" + userProfile.getLogin() + "','" + userProfile.getPass() + "')");
     }
-
+/*
     public UserProfile getUserProfileByLogin(String login) throws SQLException {
         return executor.execQuery("select * from user_table where login='" + login + "'", result -> {
             result.next();
@@ -27,4 +27,5 @@ public class UserProfileDao {
             return userProfile;
         });
     }
+*/
 }
