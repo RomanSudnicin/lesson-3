@@ -52,7 +52,7 @@ public class DBService {
                     append("user=root&").          //login
                     append("password=root");       //password
 
-            System.out.println("URL: " + url + "\n");
+            //System.out.println("URL: " + url + "\n");
 
             return DriverManager.getConnection(url.toString());
         } catch (SQLException | InstantiationException | IllegalAccessException | ClassNotFoundException e) {

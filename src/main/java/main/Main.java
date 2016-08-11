@@ -18,7 +18,7 @@ import servlets.StopServlet;
 public class Main {
     public static void main (String[] args) throws Exception {
 
-        DBService.getDBService().printConnectInfo();
+        //DBService.getDBService().printConnectInfo();
 
         //System.exit(0);
 
