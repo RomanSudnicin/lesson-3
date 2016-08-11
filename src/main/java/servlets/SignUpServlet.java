@@ -27,6 +27,7 @@ public class SignUpServlet extends HttpServlet {
         String password = req.getParameter("password");
         AccountService accountService = (AccountService) context.get(AccountService.class);
         UserProfile userProfile = new UserProfile();
+        userProfile.setId(-1);
         userProfile.setLogin(login);
         userProfile.setPass(password);
         accountService.addNewUser(userProfile);

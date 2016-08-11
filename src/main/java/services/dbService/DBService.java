@@ -29,6 +29,7 @@ public class DBService {
     public Configuration getMysqlConfigyration() {
         Configuration configuration = new Configuration();
 
+        configuration.addAnnotatedClass(UserProfile.class);
 
         configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
         configuration.setProperty("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
