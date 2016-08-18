@@ -16,7 +16,7 @@ import java.io.Serializable;
  * Created by roman on 10.08.16.
  */
 public class DBService {
-    private static final String hibernate_show_sql = "true";
+    private static final String hibernate_show_sql = "false";
     private static final String hibernate_hbm2ddl_auto = "create";
 
     private final SessionFactory sessionFactory;

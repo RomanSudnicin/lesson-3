@@ -12,6 +12,7 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import servlets.SignInServlet;
 import servlets.SignUpServlet;
 import servlets.StopServlet;
+import servlets.WebSocketChatServlet;
 
 /**
  * Created by roman on 06.08.16.
@@ -19,17 +20,19 @@ import servlets.StopServlet;
 public class Main {
     public static void main (String[] args) throws Exception {
 
-        Context context = new Context();
-        context.add(DBService.class,new DBService());
-        context.add(AccountService.class, new AccountService(context));
+        //Context context = new Context();
+        //context.add(DBService.class,new DBService());
+        //context.add(AccountService.class, new AccountService(context));
 
 
 
 
         ServletContextHandler servletContextHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        servletContextHandler.addServlet(new ServletHolder(new SignUpServlet(context)),"/signup");
-        servletContextHandler.addServlet(new ServletHolder(new SignInServlet(context)),"/signin");
-        servletContextHandler.addServlet(new ServletHolder(new StopServlet()),"/stop");
+        //servletContextHandler.addServlet(new ServletHolder(new SignUpServlet(context)),"/signup");
+        //servletContextHandler.addServlet(new ServletHolder(new SignInServlet(context)),"/signin");
+        //servletContextHandler.addServlet(new ServletHolder(new StopServlet()),"/stop");
+
+        servletContextHandler.addServlet(new ServletHolder(new WebSocketChatServlet()),"/chat");
 
 
         ResourceHandler resourceHandler = new ResourceHandler();
